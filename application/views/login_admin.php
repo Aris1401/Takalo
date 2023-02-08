@@ -29,37 +29,18 @@
                     </div>
 
                     <div class="login-form-inputs">
-                        <input type="text" name="username" id="username" placeholder="username" value="Jane">
-                        <input type="password" name="password" id="password" placeholder="password" value="abcdef">
+                        <input type="text" name="username" id="username" placeholder="username" value="John">
+                        <input type="password" name="password" id="password" placeholder="password" value="123456">
                         <p class="error-message">Nom ou mot de passe incorrect</p>
                     </div>
 
                     <div class="login-form-links">
-                        <a href="<?php echo site_url('backoffice/loginRegister/admin') ?>">Etes vous admin?</a>
+                        <a>Aucun compte?</a>
                     </div>
 
                     <input type="submit" value="Se connecter" class="submit-login">
                 </form>
-            </div>
-
-            <!-- Register form -->
-            <div class="register-form-container">
-                <form action="<?php echo site_url('backoffice/loginRegister/register/') ?>" method="post" class="register-form">
-                    <div class="titles">
-                        <h1>S'inscrire</h1>
-                    </div>
-    
-                    <div class="register-form-inputs">
-                        <input type="text" name="nom" id="nom" placeholder="nom">
-                        <input type="text" name="prenom" id="prenom" placeholder="prenom">
-                        <input type="date" name="date" id="date" placeholder="date">
-                        <input type="password" name="password" id="password" placeholder="password">
-                        <p class="error-message-register">Veuillez entrer des informations valides</p>
-                    </div>
-    
-                    <input type="submit" value="S'inscrire" class="submit-register">
-                </form>
-            </div>             
+            </div>          
         </div>
     </div>
 </body>

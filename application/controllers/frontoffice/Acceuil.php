@@ -13,6 +13,10 @@
                 redirect('backoffice/LoginRegister');
             }
 
+            if ($_SESSION['current_user']->getestAdmin() == 1) {
+                redirect('backoffice/admin');
+            }
+
             $all_categorie = $this->categorie->getAllCategorie();
             $data['categories'] = $all_categorie;
 

@@ -127,7 +127,8 @@
         }
 
         public function changeEtatById($idEchange, $etat){
-            $query = "UPDATE Echange SET etat = ? WHERE idEchange = %s";
+            $query = "UPDATE Echange SET etat = ?, dateEchange = NOW() WHERE idEchange = %s";
+            // UPDATE Echange SET etat = 5, dateEchange = NOW() WHERE idEchange = 2
             $query = sprintf($query, $this->db->escape($idEchange));
 
             $this->db->query($query, array($etat));

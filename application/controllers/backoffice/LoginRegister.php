@@ -15,6 +15,19 @@
             }
         }
 
+        function admin() {
+            $this->load->helper('url');
+            session_start();
+
+            // echo isset($_SESSION['current_user']); 
+
+            if (isset($_SESSION['current_user'])) {
+                redirect('frontoffice/acceuil');
+            } else {
+                $this->load->view('login_admin');
+            }
+        }
+
         function login() {
             session_start();
 

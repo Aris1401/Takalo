@@ -9,13 +9,13 @@ function login() {
         let response = xhr.responseText.split("|")[0];
 
         if (response.includes("True")) {
-            window.location.href = "<?php echo site_url('frontoffice/acceuil'); ?>"
+            window.location.replace("http://takalo-takalo.rf.gd/index.php/frontoffice/acceuil")
         } else {
             document.querySelector('.error-message').classList.toggle('active', true);
         }
     })
 
-    xhr.open("post", "./loginRegister/login");
+    xhr.open("post", "http://takalo-takalo.rf.gd/index.php/backoffice/loginrRegister/login");
     xhr.send(loginFormData);
 }
 
