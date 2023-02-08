@@ -11,15 +11,15 @@
 <?php $this->load->view('assetsIncluder'); ?>
 
 <body>
-	<?php $this->load->view('navbar'); ?>
+<?php $this->load->view('navbar'); ?>
 
 	<div class="total mt-3">
 		<div class="container">
 			<div class="row">
 				<div class="card w-100 d-flex flex-row">
-					<div class="col-md-6 card-group h-50">
+					<div class="col-md-6">
 						<?php foreach($this->objet->getAllImages($current_objet->getidObjet()) as $image) { ?>
-							<img class="rounded" width="300" height="300" src="<?php echo base_url('assets/images/'.$image); ?>" alt="Card image cap">
+							<img class="card-img-top rounded" src="<?php echo base_url('assets/images/'.$image); ?>" alt="Card image cap">
 						<?php } ?>
 					</div>
 
@@ -40,20 +40,17 @@
 									<?php }
 								?>
 
-								<p>Proprietaire: <?php echo $current_user->getnomUser(); ?></p>
-
 								<?php foreach($historique as $hist) { ?>
-									<p>Ancien: <?php echo $hist['user'] ?> le <?php echo $hist['date'] ?></p>
+									<p>Ancien: <?php echo $hist['nom'] ?> le <?php echo $hist['date'] ?></p>
 								<?php } ?>
 							</div>
 						</div>
 
 						<a class="btn btn-primary mt-3" href="<?php echo site_url('frontoffice/echange/change/'.$current_objet->getidObjet()); ?>">Echanger</a>
-						<?php if (isset($error)) ?>
-							<span>
-								<p class="text-danger mt-3 inline">Vous n'avez pas d'objet a echanger.</p>
-								<a class="inline"href="<?php echo site_url('frontoffice/profil/ajoutObjet'); ?>">En ajouter?</a>
-							</span>
+            <h3>Remise=<?php echo $marge; ?></h3>
+						<?php if (isset($_GET['error'])) ?>
+							<p class="text-danger mt-3">Vous n'avez pas d'objet a echanger.</p>
+							<a href="<?php echo site_url('frontoffice/profil/ajoutObjet'); ?>">En ajouter?</a>
 						<?php ?>
 					</div>
 						

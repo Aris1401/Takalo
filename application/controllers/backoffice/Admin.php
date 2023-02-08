@@ -3,11 +3,13 @@
 
     class Admin extends CI_Controller {
         function index() {
-            session_start();
             $this->load->helper('url');
-
             $this->load->model('Utilisateur', 'user');
             $this->load->model('Echanger', 'troc');
+            
+            session_start();
+
+            if ($_SESSION['current_user']->getestAdmin() != 1) redirect('frontoffice/acceuil');
 
             $data['nombre_user'] = $this->user->getNombreUsers();
             $data['nombre_echange'] = $this->troc->getNombreEchanger();

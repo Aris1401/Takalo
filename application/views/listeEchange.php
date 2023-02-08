@@ -8,11 +8,11 @@
 </head>
 
 <!-- Styles -->
-<link href="<?php echo site_url('assets/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" type="text/css"/>
-<link href="<?php echo site_url('assets/vendor/animate/animate.css'); ?>" rel="stylesheet" type="text/css"/>
-
+<?php $this->load->view('assetsIncluder'); ?>
 
 <body>
+    <?php $this->load->view('navbar'); ?>
+
     <div class="container">
         <h3 class="p-3">Liste des echanges courants</h3>
 
@@ -25,11 +25,19 @@
                 <div class="card w-100">
                     <div class="d-flex flex-row justify-content-between p-3">
                         <div class="card" style="width: 5rem; height: 5rem;">
-                            <p class="card-text">Yay</p>
+                            <p class="card-text"><?php echo $this->objet->getObjetById($echange['receveur'])->getnomObjet(); ?></p>
                         </div>
 
-                        <div class="card" style="width: 5rem; height: 5rem;">
-                            <p class="card-text">Yay</p>
+                        <div class="card d-flex flex-row gap-1">
+                            <?php 
+                                $sous_echanges = explode(",", $echange['echangeur']);
+    
+                                foreach ($sous_echanges as $idObjet) {
+                            ?>
+                            <div class="card" style="width: 5rem; height: 5rem;">
+                                <p class="card-text"><?php echo $this->objet->getObjetById($idObjet)->getnomObjet(); ?></p>
+                            </div>
+                            <?php } ?>
                         </div>
                     </div>
 

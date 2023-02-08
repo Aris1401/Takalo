@@ -27,11 +27,13 @@
                   </form>
 
                   <div class="nav-item">
-                     <a class="btn btn-primary rounded text-white" href="<?php echo site_url('frontoffice/profil') ?>">Profil</a>
+                     <a class="btn btn-primary rounded text-white" href="<?php echo site_url('frontoffice/profil') ?>">User: <?php echo $_SESSION['current_user']->getnomUser(); ?></a>
                   </div>
                         
                   <div class="nav-item navbar-left btn-group mr-5">
-                     <a class="btn btn-primary text-white" href="<?php echo site_url('backoffice/admin') ?>">Panneau admin</a>   
+                     <?php if ($_SESSION['current_user']->getestAdmin() == 1) { ?>
+                        <a class="btn btn-primary text-white" href="<?php echo site_url('backoffice/admin') ?>">Panneau admin</a>
+                     <?php } ?>   
                      <a class="btn btn-primary text-white" href="<?php echo site_url('frontoffice/acceuil/deconnexion') ?>">Deconnexion</a>   
                   </div>
 

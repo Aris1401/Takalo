@@ -8,10 +8,11 @@
 </head>
 
 <!-- Styles -->
-<link href="<?php echo site_url('assets/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" type="text/css"/>
-<link href="<?php echo site_url('assets/vendor/animate/animate.css'); ?>" rel="stylesheet" type="text/css"/>
+<?php $this->load->view('assetsIncluder'); ?>
 
 <body>
+    <?php $this->load->view('navbar'); ?>
+
     <div class="container">
         <h3 class="card p-3 mt-2">Gerer categories</h3>
 

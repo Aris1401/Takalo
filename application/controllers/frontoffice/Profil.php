@@ -25,6 +25,7 @@
         public function ajoutObjet() {
             $this->load->helper('url');
             $this->load->model('Categorie', 'categorie');
+            $this->load->model('Utilisateur', 'user');
             session_start();
 
             if (!isset($_SESSION['current_user'])) {
@@ -78,6 +79,7 @@
 
         public function modifierObjet($id = 'NULL') {
             $this->load->helper('url');
+            $this->load->model('Utilisateur', 'user');
 
             if ($id == 'NULL') redirect(site_url('frontoffice/profil'));
 
@@ -120,15 +122,19 @@
         public function gererCategorie() {
             $this->load->helper('url');
             $this->load->model('Categorie', 'categorie');
+            $this->load->model('Utilisateur', 'user');
             $all_categorie = $this->categorie->getAllCategorie();
 
             $data['categories'] = $all_categorie;
             session_start();
 
-            if (!isset($_SESSION['current_user'])) {
-                redirect('backoffice/LoginRegister');
+            if ($_SESSION['current_user']->getestAdmin() != 1) $this->load->view('errorAdmin');
+            else {
+                if (!isset($_SESSION['current_user'])) {
+                    redirect('backoffice/LoginRegister');
+                }
+                $this->load->view('categories', $data);
             }
-            $this->load->view('categories', $data);
         }
 
         public function ajouterCategorie() {

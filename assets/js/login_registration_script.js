@@ -9,7 +9,7 @@ function login() {
         let response = xhr.responseText.split("|")[0];
 
         if (response.includes("True")) {
-             window.location.replace('../frontoffice/acceuil')
+            window.location.href = "<?php echo site_url('frontoffice/acceuil'); ?>"
         } else {
             document.querySelector('.error-message').classList.toggle('active', true);
         }

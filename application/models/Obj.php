@@ -60,8 +60,8 @@
         public function getObjetById($id) {
             $users_Table = "Objet";
 
-            $query = "SELECT * FROM ".$users_Table." WHERE idObjet = %s";
-            $query = sprintf($query, $this->db->escape($id));
+            $query = "SELECT * FROM ".$users_Table." WHERE idObjet = %d";
+            $query = sprintf($query, $id);
 
             $resultat = $this->db->query($query);
             $ligne_resultat = $resultat->row_array();
@@ -121,7 +121,7 @@
         }
 
         public function historique($idObjet) {
-            session_start();
+            
 
             $query = "SELECT u.nomUser as user, e.dateEchange as date FROM Echange as e JOIN Utilisateur as u ON e.reveceurUser = u.idUser  AND e.etat = 5";
 
@@ -156,6 +156,39 @@
             $images_splited = explode(",", $images);
     
             return $images_splited;
+        }
+
+        function getObjetsDeMarge($idObjet, $marge) {
+            $this->load->model('Obj', 'objet');
+            $objet = $this->objet->getObjetById($idObjet);
+
+            $prix_est_max = $objet->getPrixEstimatif() + ($objet->getPrixEstimatif() * ($marge / 100));
+            $prix_est_min = $objet->getPrixEstimatif() - ($objet->getPrixEstimatif() * ($marge / 100));
+
+            $query = "SELECT * FROM Objet WHERE idUser != %d AND prixEstimatif <= %g AND prixEstimatif >= %g";
+            $query = sprintf($query, $_SESSION['current_user']->getidUser(), $prix_est_max, $prix_est_min);
+
+            $resultat = $this->db->query($query);
+
+            $currentObjects = array();
+
+            foreach($resultat->result_array() as $data) {
+                array_push($currentObjects, $data);
+            }
+
+            return $currentObjects;
+        }
+
+        function getMargeToObjet($idObjetMain, $idObjetSecond) {
+            $this->load->model('Obj', 'objet');
+            $objetMain = $this->objet->getObjetById($idObjetMain);
+            $objetSecond = $this->objet->getObjetById($idObjetSecond);
+
+            if ($objetMain->getPrixEstimatif() >= $objetSecond->getPrixEstimatif()) {
+                return 100 * (($objetSecond->getPrixEstimatif() / $objetMain->getPrixEstimatif()) - 1);
+            } else {
+                return abs(100 * (($objetSecond->getPrixEstimatif() / $objetMain->getPrixEstimatif()) - 1));
+            }
         }
     }
 

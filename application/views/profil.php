@@ -8,9 +8,7 @@
 </head>
 
 <!-- Styles -->
-<link href="<?php echo site_url('assets/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" type="text/css"/>
-<link href="<?php echo site_url('assets/vendor/animate/animate.css'); ?>" rel="stylesheet" type="text/css"/>
-<link href="<?php echo site_url('assets/css/navbar.css'); ?>" rel="stylesheet" type="text/css"/>
+<?php $this->load->view('assetsIncluder'); ?>
 
 <body>
   <?php $this->load->view('navbar'); ?>
@@ -29,11 +27,13 @@
     <div class="card-columns mt-3 d-flex flex-wrap mr-3 ml-3 allObject">
       <?php foreach($user_objets as $objet) { ?>
         <div class="card d-flex flex-row p-3 justify-content-between align-items-center object">
-          <img class="card-img-left rounded" src="<?php echo site_url('assets/images/'.$this->objet->get_one_of_images($objet['idObjet'])); ?>" width="150" height="150">
+          <img class="card-img-left rounded" src="<?php echo base_url('assets/images/'.$this->objet->get_one_of_images($objet['idObjet'])); ?>" width="150" height="150">
           <div class="card-body text-right">
             <p class="card-title"><?php echo $objet['nomObjet']; ?></p>
             <p class="card-text text-secondary"><?php echo $objet['description'] ?></p>
-            <a class="btn btn-primary" href="<?php echo site_url('frontoffice/profil/modifierObjet/'.$objet['idObjet']); ?>">Modifier</a>
+            <a class="btn btn-primary text-white" href="<?php echo site_url('frontoffice/profil/modifierObjet/'.$objet['idObjet']); ?>">Modifier</a>
+            <a class="btn btn-primary text-white" href="<?php echo site_url('frontoffice/listeObjetEstimatif/index/'.$objet['idObjet'])."/10"; ?>">+/-10%</a>
+            <a class="btn btn-primary text-white" href="<?php echo site_url('frontoffice/listeObjetEstimatif/index/'.$objet['idObjet'])."/20"; ?>">+/-20%</a>
           </div>
         </div>
       <?php } ?>

@@ -5,6 +5,7 @@
         public function index() {
             $this->load->model('Utilisateur', 'user');
             $this->load->model('Echanger', 'troc');
+            $this->load->model('Obj', 'objet');
             $this->load->helper('url');
             
             session_start();
@@ -15,12 +16,16 @@
             // Get tout les echanges en cours (etat = 0) 
             $all_echange = $this->troc->getAllEchangeFor($_SESSION['current_user']->getidUser());
 
+            if (isset($_SESSION['echanges'])) {
+                unset($_SESSION['echanges']);
+            }
+
             $data['echanges'] = $all_echange;
 
             $this->load->view('listeEchange', $data);
         }
 
-        public function echange($id = 'NULL') {
+        public function change($id = 'NULL') {
             $this->load->helper('url');
             $this->load->model('Utilisateur', 'user');
             $this->load->model('Obj', 'objet');
@@ -44,20 +49,59 @@
             $this->load->view('echanger', $data);
         }
 
+        public function addNewEchange() {
+            $this->load->helper('url');
+            session_start();
+
+            $idOtherObjet = $this->input->post('other_object');
+            $idObjet = $this->input->post('my_object');
+
+            if (isset($_SESSION['echanges']) && !in_array($idObjet, $_SESSION['echanges'])) {
+                $echanges = $_SESSION['echanges'];
+
+                array_push($echanges, $idObjet);
+
+                $_SESSION['echanges'] = $echanges;
+            } else if (!isset($_SESSION['echanges'])){
+                $echanges = array();
+
+                array_push($echanges, $idObjet);
+
+                $_SESSION['echanges'] = $echanges;
+            }
+
+            redirect('frontoffice/echange/change/'.$idOtherObjet);
+        }
+
         public function doEchange() {
             $this->load->helper('url');
             $this->load->model('Echanger', 'troc');
             $this->load->model('Utilisateur', 'user');
             $this->load->model('Obj', 'objet');
 
-            $my_object_id = $this->input->post('my_object');
             $other_object_id = $this->input->post('other_object');
-
             session_start();
 
-            // Fonction echanger
-            $this->troc->insertEchange($my_object_id, $other_object_id, $_SESSION['current_user']->getidUser(), $this->objet->getObjetById($other_object_id));
+            
+            if(!isset($_SESSION['echanges'])) redirect('frontoffice/acceuil');
 
+            // Fonction echanger
+            $echange_string = "";
+            for($i = 0; $i < count($_SESSION['echanges']); $i++) {
+                $echange_string .= $_SESSION['echanges'][$i];
+
+                if ($i < count($_SESSION['echanges']) - 1) {
+                    $echange_string .= ",";
+                }
+            }
+
+            if(!$this->troc->checkEchange($echange_string, $other_object_id, $_SESSION['current_user']->getIduser(), $this->objet->getObjetById($other_object_id)->getIdUser())) {
+                unset($_SESSION['echanges']);
+                redirect('frontoffice/ArisainaIante');
+            }
+            $this->troc->insertEchange($echange_string, $other_object_id, $_SESSION['current_user']->getIduser(), $this->objet->getObjetById($other_object_id));
+
+            unset($_SESSION['echanges']);
             redirect('frontoffice/echange');
         }
 
@@ -68,7 +112,12 @@
 
             $this->troc->changeEtatById($id, 5);
 
-            $this->objet->changeProprietaire($this->troc->getEchangeById($id)->getEchangeur(), $this->troc->getEchangeById($id)->getreveceurUser());
+            $currentEchange = $this->troc->getEchangeById($id);
+            $allOtherObjects = explode(',', $currentEchange->getEchangeur());
+
+            foreach ($allOtherObjects as $idObjet) {
+                $this->objet->changeProprietaire($idObjet, $this->troc->getEchangeById($id)->getreveceurUser());
+            }
 
             redirect('frontoffice/echange');
         }

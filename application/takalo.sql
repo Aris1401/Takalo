@@ -26,7 +26,7 @@ nomCategorie VARCHAR(255) NOT NULL);
 
 CREATE TABLE Echange (
 idEchange INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-echangeur INT NOT NULL,
+echangeur VARCHAR(255) NOT NULL,
 receveur INT NOT NULL,
 echangeurUser INT NOT NULL,
 reveceurUser INT NOT NULL,
@@ -35,7 +35,6 @@ dateEchange TIMESTAMP);
 
 ALTER TABLE Objet ADD CONSTRAINT Objet_categorie_Categorie_idCategorie FOREIGN KEY (categorie) REFERENCES Categorie(idCategorie);
 ALTER TABLE Objet ADD CONSTRAINT Objet_idUser_Utilisateur_idUser FOREIGN KEY (idUser) REFERENCES Utilisateur(idUser);
-ALTER TABLE Echange ADD CONSTRAINT Echange_echangeur_Objet_idObjet FOREIGN KEY (echangeur) REFERENCES Objet(idObjet);
 ALTER TABLE Echange ADD CONSTRAINT Echange_receveur_Objet_idObjet FOREIGN KEY (receveur) REFERENCES Objet(idObjet);
 ALTER TABLE Echange ADD CONSTRAINT Echange_echangeur_Objet_idUser FOREIGN KEY (echangeurUser) REFERENCES Utilisateur(idUser);
 ALTER TABLE Echange ADD CONSTRAINT Echange_receveur_Objet_idUser FOREIGN KEY (reveceurUser) REFERENCES Utilisateur(idUser);

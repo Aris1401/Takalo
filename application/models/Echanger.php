@@ -132,5 +132,18 @@
 
             $this->db->query($query, array($etat));
         }
+        
+        public function checkEchange($echangeur, $receveur, $idUser, $other_object) {
+            $users_Table = "Echange";
+    
+            $query = "SELECT * FROM ".$users_Table." WHERE echangeur = %s  and receveur = %d and echangeurUser = %d and reveceurUser = %d " ;
+            $query = sprintf($query,$this->db->escape($echangeur), $receveur, $idUser, $other_object);
+
+            $resultat = $this->db->query($query);
+            $ligne_resultat = $resultat->row_array();
+    
+            if ($ligne_resultat == null) return true;
+            return false;
+        }
     }
 ?>

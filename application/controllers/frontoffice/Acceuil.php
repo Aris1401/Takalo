@@ -37,7 +37,14 @@
             if ($this->input->get('error')) {
                 $data['error'] = true;
             }
-
+             
+            $this->load->model('Utilisateur', 'user');
+            session_start();
+            if($current_objet==null || $_SESSION['current_user']->getidUser()==$current_objet->getidUser())
+            {
+                redirect('frontoffice/acceuil');
+            }
+            
             $current_user = $this->user->getUserById($current_objet->getidUser());
             $data['current_user'] = $current_user;
 

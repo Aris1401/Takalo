@@ -11,9 +11,7 @@
 </head>
 
 <!-- Styles -->
-<link href="<?php echo site_url('assets/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet" type="text/css"/>
-<link href="<?php echo site_url('assets/vendor/animate/animate.css'); ?>" rel="stylesheet" type="text/css"/>
-<link href="<?php echo site_url('assets/css/navbar.css'); ?>" rel="stylesheet" type="text/css"/>
+<?php $this->load->view('assetsIncluder'); ?>
 
 <body>
 	<?php $this->load->view('navbar'); ?>
@@ -27,7 +25,7 @@
 					<input class="form-control" type="text" name="nom" id="nom" placeholder="Nom">
 
 					<label for="prix">Prix</label>
-					<input class="form-control" type="text" name="prix_estimer" id="prix" placeholder="Prix estimer">
+					<input class="form-control" type="number" step="0.1" name="prix_estimer" id="prix" placeholder="Prix estimer">
 
 					<label for="description">Description</label>
 					<input class="form-control" type="text" name="description" id="description" placeholder="Description">
