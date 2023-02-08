@@ -1,0 +1,103 @@
+body {
+    min-height: 100vh;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    
+    background: linear-gradient(to right top, rgb(116, 202, 135), rgb(81, 214, 90));
+}
+
+.login-register-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80vw;
+    height: 80vh;
+    
+    background-color: rgb(75, 75, 75);
+}
+
+input[type = "text"], input[type = "password"] {
+    border: none;
+
+    padding: .5rem 1rem .5rem 1rem;
+
+    border-radius: 10px;
+
+    width: 100%;
+} 
+
+/* Login */
+.error-message {
+    display: none;
+    color: red;
+
+    margin: 0;
+    padding: 0;
+
+    font-size: .6rem;
+}
+
+.error-message.active {
+    display: inline;
+}
+
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+
+    background: linear-gradient(to right top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
+
+    padding: .5rem .5rem 1rem .5rem;
+}
+
+.login-form-container .login-form-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    gap: .3rem;
+}
+
+/* Register */
+.error-message-register {
+    display: none;
+    color: red;
+
+    margin: 0;
+    padding: 0;
+
+    font-size: .6rem;
+}
+
+.error-message-register.active {
+    display: inline;
+}
+
+.register-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 50%;
+
+    background: linear-gradient(to right top, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.5));
+
+    padding: .5rem .5rem 1rem .5rem;
+}
+
+.register-form-container .register-form-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    gap: .3rem;
+}

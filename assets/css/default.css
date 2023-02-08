@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'FOCO';
+    src: url('../fonts/FOCO.TTF');
+}
+
+* {
+    font-family: 'FOCO';
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}

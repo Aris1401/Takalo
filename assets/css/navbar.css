@@ -1,0 +1,153 @@
+/* Navbar */
+
+.navigation {
+	padding-top: 1rem;
+}
+
+.navigation.container-fluid {
+	position: absolute;
+}
+
+.navbar {
+	width: 100%;
+	z-index: 99;
+	top: 15px;
+	padding: 0;
+}
+
+.navbar-brand {
+	padding-left: 0px;
+}
+
+.navbar-brand:link,
+.navbar-brand:hover,
+.navbar-brand:visited {
+	text-decoration: none;
+	color:black;
+	font-size: 25px;
+}
+
+.container a {
+	display: inline-block;
+	position: relative;
+	text-align: center;
+	color: #000;
+	text-decoration: none;
+	font-size: 20px;
+	overflow: hidden;
+	top: 5px;
+}
+
+.container a:after {
+	content: '';
+	position: absolute;
+	background: #000;
+	height: 2px;
+	width: 0%;
+	transform: translateX(-50%);
+	left: 50%;
+	bottom: 0;
+	transition: .35s ease;
+}
+
+.container a:hover:after,
+.container a:focus:after,
+.container a:active:after {
+	width: 100%;
+}
+
+.overlay {
+	position: fixed;
+	background: #000;
+	z-index: 98;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 0%;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity .35s, visibility .35s, height .35s;
+	overflow: hidden;
+}
+
+.overlay.open {
+	opacity: 1;
+	visibility: visible;
+	height: 100%;
+}
+
+.overlay.open li {
+	animation: fadeInRight .5s ease forwards;
+	animation-delay: .35s;
+}
+
+.overlay.open li:nth-of-type(2) {
+	animation-delay: .4s;
+}
+
+.overlay.open li:nth-of-type(3) {
+	animation-delay: .45s;
+}
+
+.overlay.open li:nth-of-type(4) {
+	animation-delay: .50s;
+}
+
+.overlay nav {
+	position: relative;
+	height: 70%;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 50px;
+	font-family: 'Reenie Beanie', cursive;
+	font-weight: 400;
+	text-align: center;
+}
+
+.overlay ul {
+	list-style: none;
+	padding: 0;
+	margin: 0 auto;
+	display: inline-block;
+	position: relative;
+	height: 100%;
+}
+
+.overlay ul li {
+	display: block;
+	height: 25%;
+	height: calc(100% / 4);
+	min-height: 50px;
+	position: relative;
+	opacity: 0;
+}
+
+.overlay ul li a {
+	display: block;
+	position: relative;
+	color: #FFF;
+	text-decoration: none;
+	overflow: hidden;
+	transition: all .2s ease-in-out;
+}
+
+.overlay ul li a:hover:after,
+.overlay ul li a:focus:after,
+.overlay ul li a:active:after {
+	width: 100%;
+}
+
+.overlay ul li a:hover {
+	transform: scale(1.5);
+}
+
+@keyframes fadeInRight {
+	0% {
+		opacity: 0;
+		left: 20%;
+	}
+	100% {
+		opacity: 1;
+		left: 0;
+	}
+}
